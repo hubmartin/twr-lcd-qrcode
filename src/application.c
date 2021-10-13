@@ -3,12 +3,12 @@
 #include "qrcodegen.h"
 
 // LED instance
-bc_led_t led;
+twr_led_t led;
 
 // Button instance
-bc_button_t button;
+twr_button_t button;
 
-bc_gfx_t *gfx;
+twr_gfx_t *gfx;
 
 void qrcode_project(char *project_name);
 
@@ -31,9 +31,9 @@ const char *str_urls[] =
 
 int project_index = 0;
 
-void button_event_handler(bc_button_t *self, bc_button_event_t event, void *event_param)
+void button_event_handler(twr_button_t *self, twr_button_event_t event, void *event_param)
 {
-    if (event == BC_BUTTON_EVENT_PRESS)
+    if (event == TWR_BUTTON_EVENT_PRESS)
     {
         project_index++;
 
@@ -49,10 +49,10 @@ void button_event_handler(bc_button_t *self, bc_button_event_t event, void *even
 
 static void print_qr(const uint8_t qrcode[])
 {
-    bc_gfx_clear(gfx);
+    twr_gfx_clear(gfx);
 
-    bc_gfx_set_font(gfx, &bc_font_ubuntu_13);
-    bc_gfx_draw_string(gfx, 2, 0, (char*)str_urls[project_index], true);
+    twr_gfx_set_font(gfx, &twr_font_ubuntu_13);
+    twr_gfx_draw_string(gfx, 2, 0, (char*)str_urls[project_index], true);
 
     uint32_t offset_x = 8;
     uint32_t offset_y = 32;
@@ -67,17 +67,17 @@ static void print_qr(const uint8_t qrcode[])
             uint32_t x2 = x1 + box_size;
             uint32_t y2 = y1 + box_size;
 
-            bc_gfx_draw_fill_rectangle(gfx, x1, y1, x2, y2, qrcodegen_getModule(qrcode, x, y));
+            twr_gfx_draw_fill_rectangle(gfx, x1, y1, x2, y2, qrcodegen_getModule(qrcode, x, y));
 		}
 		//fputs("\n", stdout);
 	}
 	//fputs("\n", stdout);
-    bc_gfx_update(gfx);
+    twr_gfx_update(gfx);
 }
 
 void qrcode_project(char *text)
 {
-    bc_system_pll_enable();
+    twr_system_pll_enable();
 
 	// Make and print the QR Code symbol
 	static uint8_t qrcode[qrcodegen_BUFFER_LEN_MAX];
@@ -89,21 +89,21 @@ void qrcode_project(char *text)
 		print_qr(qrcode);
     }
 
-    bc_system_pll_disable();
+    twr_system_pll_disable();
 }
 
 void application_init(void)
 {
     // Initialize LED
-    bc_led_init(&led, BC_GPIO_LED, false, false);
-    bc_led_set_mode(&led, BC_LED_MODE_ON);
+    twr_led_init(&led, TWR_GPIO_LED, false, false);
+    twr_led_set_mode(&led, TWR_LED_MODE_ON);
 
     // Initialize button
-    bc_button_init(&button, BC_GPIO_BUTTON, BC_GPIO_PULL_DOWN, false);
-    bc_button_set_event_handler(&button, button_event_handler, NULL);
+    twr_button_init(&button, TWR_GPIO_BUTTON, TWR_GPIO_PULL_DOWN, false);
+    twr_button_set_event_handler(&button, button_event_handler, NULL);
 
-    bc_module_lcd_init();
-    gfx = bc_module_lcd_get_gfx();
+    twr_module_lcd_init();
+    gfx = twr_module_lcd_get_gfx();
 
     qrcode_project((char*)str_urls[project_index]);
 }
