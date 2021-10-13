@@ -2,7 +2,7 @@
 
 # QR LCD example for HARDWARIO Core Module
 
-[![Travis](https://img.shields.io/travis/bigclownprojects/bcf-lcd-qrcode/master.svg)](https://travis-ci.org/bigclownprojects/bcf-lcd-qrcode)
+[![build](https://github.com/hardwario/bcf-lcd-qrcode/actions/workflows/main.yml/badge.svg)](https://github.com/hardwario/bcf-lcd-qrcode/actions/workflows/main.yml)
 [![Release](https://img.shields.io/github/release/bigclownprojects/bcf-lcd-qrcode.svg)](https://github.com/bigclownprojects/bcf-lcd-qrcode/releases)
 [![License](https://img.shields.io/github/license/bigclownprojects/bcf-lcd-qrcode.svg)](https://github.com/bigclownprojects/bcf-lcd-qrcode/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/hardwario_en.svg?style=social&label=Follow)](https://twitter.com/hardwario_en)
